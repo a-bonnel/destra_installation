@@ -4,13 +4,15 @@ from pprint import pprint
 
 from utils import colorize
 
-# Define Destra folder
-DESTRA_ROOT_FOLDER = ""
-# DESTRA_ROOT_FOLDER = "/Users/abonnel/Documents/Destra/"
-if DESTRA_ROOT_FOLDER == "":
+# Define Destra root folder
+given_path = os.environ.get("DESTRA_ROOT_FOLDER")
+if given_path:
+    DESTRA_ROOT_FOLDER = given_path
+else:
     print(
         colorize(
-            "Before anything you need to set the DESTRA_ROOT_FOLDER constant at the top of the script",
+            "Before anything you need to set the DESTRA_ROOT_FOLDER constant at the top of the script.\n"
+            "Use the command DESTRA_ROOT_FOLDER=/path/to/destra/root/folder python3 install_destra.py",
             "red",
         )
     )
@@ -50,7 +52,6 @@ repositories = [
     "destra-imageserver-philips",
     "destra-imageserver-bioformats",
     "destra-imageserver-openslide",
-    # "destra-integration-tests", # Not yet implemented
     "destra-common",
     "destra-imageserver-openslide-py",
     "destra-adapter-sectra",
@@ -58,6 +59,7 @@ repositories = [
     "destra-worker",
     "destra-adapter-roche",
     "destra-adapter-calopix",
+    # "destra-integration-tests", # Not yet implemented
 ]
 
 print("==========================================================")
@@ -70,10 +72,19 @@ print("==========================================================")
 
 # Create folder if it does not exist
 if os.path.isdir(DESTRA_ROOT_FOLDER):
-    print(f"The path '{DESTRA_ROOT_FOLDER}' already exists.")
+    print(colorize(f"The path '{DESTRA_ROOT_FOLDER}' already exists.", "green"))
 else:
-    print(f"The path '{DESTRA_ROOT_FOLDER}' does not exist and will be created.")
-    os.makedirs(DESTRA_ROOT_FOLDER, exist_ok=True)
+    print(colorize(f"The path '{DESTRA_ROOT_FOLDER}' does not exist.", "magenta"))
+    create_dir = input(colorize("Do you wish to create that folder ? y/N", "magenta"))
+    if create_dir == "y":
+        os.makedirs(DESTRA_ROOT_FOLDER, exist_ok=True)
+        print(
+            colorize(
+                f"The path '{DESTRA_ROOT_FOLDER}' has been created, continuing script.", "yellow"
+            )
+        )
+    else:
+        print(colorize("Folder was not created, stopping now", "red"))
 
 if ENABLE_CLONING:
     # # Clone each repository into DESTRA_ROOT_FOLDER
