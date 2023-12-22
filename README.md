@@ -1,2 +1,3 @@
 # destra_installation
-Script
+
+This script is meant to perform actions on all Destra repositories
