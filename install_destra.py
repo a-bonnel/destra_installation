@@ -21,9 +21,9 @@ else:
 # Configuration flags
 # GENERAL TASKS
 ENABLE_CLONING = False
+ENABLE_INSTALL_PRE_COMMIT = False
 ENABLE_PULLING = False
 ENABLE_BRANCHING = False
-ENABLE_INSTALL_PRE_COMMIT = False
 ENABLE_GIT_STATUS = False
 
 # # Git add, commit, push
