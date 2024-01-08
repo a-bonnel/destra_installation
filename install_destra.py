@@ -22,7 +22,8 @@ else:
 # GENERAL TASKS
 ENABLE_CLONING = False
 ENABLE_INSTALL_PRE_COMMIT = False
-ENABLE_PULLING = False
+ENABLE_CHECKOUT_DEVELOP = True
+ENABLE_PULLING = True
 ENABLE_BRANCHING = False
 ENABLE_GIT_STATUS = False
 
@@ -102,6 +103,17 @@ if ENABLE_CLONING:
                 # subprocess.run(["pre-commit", "autoupdate"])
                 subprocess.run(["pre-commit", "install"])
     print("Cloning completed.")
+
+if ENABLE_CHECKOUT_DEVELOP:
+    # # Git checkout to develop branch
+    print(f"\n*****\n***Git pull on destra repos in {os.getcwd()}.\n*****")
+    for repo in repositories:
+        print(
+            f"\nCheckout in repo {repo} at {os.path.join(DESTRA_ROOT_FOLDER, repo)} ==================="
+        )
+        os.chdir(os.path.join(DESTRA_ROOT_FOLDER, repo))
+        subprocess.run(["git", "checkout", "develop"])
+
 
 if ENABLE_PULLING:
     # # Git pull on all repos
