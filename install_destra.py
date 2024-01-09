@@ -24,6 +24,7 @@ ENABLE_CLONING = False
 ENABLE_INSTALL_PRE_COMMIT = False
 ENABLE_CHECKOUT_DEVELOP = True
 ENABLE_PULLING = True
+ENABLE_CARGO_UPDATE = True
 ENABLE_BRANCHING = False
 ENABLE_GIT_STATUS = False
 
@@ -124,6 +125,16 @@ if ENABLE_PULLING:
         )
         os.chdir(os.path.join(DESTRA_ROOT_FOLDER, repo))
         subprocess.run(["git", "pull"])
+
+if ENABLE_CARGO_UPDATE:
+    # # Git pull on all repos
+    print(f"\n*****\n***Cargo update on destra repos in {os.getcwd()}.\n*****")
+    for repo in repositories:
+        print(
+            f"\nPulling in repo {repo} at {os.path.join(DESTRA_ROOT_FOLDER, repo)} ==================="
+        )
+        os.chdir(os.path.join(DESTRA_ROOT_FOLDER, repo))
+        subprocess.run(["cargo", "update"])
 
 if ENABLE_BRANCHING:
     # # Git pull on all repos
