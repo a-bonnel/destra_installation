@@ -94,10 +94,10 @@ if ENABLE_CLONING:
     for repo in repositories:
         os.chdir(DESTRA_ROOT_FOLDER)
         if os.path.isdir(repo):
-            print(f"The repo '{repo}' has already been cloned.")
+            print(f"The repo '{repo.upper()}' has already been cloned.")
         else:
-            print(f"\nThe path '{repo}' does not exist and will be created.=======")
-            subprocess.run(["git", "clone", f"git@github.com:owkin/{repo}.git"])
+            print(f"\nThe path '{repo.upper()}' does not exist and will be created.=======")
+            subprocess.run(["git", "clone", f"git@github.com:owkin/{repo.upper()}.git"])
             if ENABLE_INSTALL_PRE_COMMIT:
                 # Install pre-commit
                 os.chdir(os.path.join(DESTRA_ROOT_FOLDER, repo))
@@ -110,7 +110,7 @@ if ENABLE_CHECKOUT_DEVELOP:
     print(f"\n*****\n***Git pull on destra repos in {os.getcwd()}.\n*****")
     for repo in repositories:
         print(
-            f"\nCheckout in repo {repo} at {os.path.join(DESTRA_ROOT_FOLDER, repo)} ==================="
+            f"\nCheckout in repo {repo.upper()} at {os.path.join(DESTRA_ROOT_FOLDER, repo)} ==================="
         )
         os.chdir(os.path.join(DESTRA_ROOT_FOLDER, repo))
         subprocess.run(["git", "checkout", "develop"])
@@ -121,7 +121,7 @@ if ENABLE_PULLING:
     print(f"\n*****\n***Git pull on destra repos in {os.getcwd()}.\n*****")
     for repo in repositories:
         print(
-            f"\nPulling in repo {repo} at {os.path.join(DESTRA_ROOT_FOLDER, repo)} ==================="
+            f"\nPulling in repo {repo.upper()} at {os.path.join(DESTRA_ROOT_FOLDER, repo)} ==================="
         )
         os.chdir(os.path.join(DESTRA_ROOT_FOLDER, repo))
         subprocess.run(["git", "pull"])
@@ -131,7 +131,7 @@ if ENABLE_CARGO_UPDATE:
     print(f"\n*****\n***Cargo update on destra repos in {os.getcwd()}.\n*****")
     for repo in repositories:
         print(
-            f"\nPulling in repo {repo} at {os.path.join(DESTRA_ROOT_FOLDER, repo)} ==================="
+            f"\nPulling in repo {repo.upper()} at {os.path.join(DESTRA_ROOT_FOLDER, repo)} ==================="
         )
         os.chdir(os.path.join(DESTRA_ROOT_FOLDER, repo))
         subprocess.run(["cargo", "update"])
@@ -142,7 +142,7 @@ if ENABLE_BRANCHING:
     branch_name = "abo/pre-commit"
     for repo in repositories:
         print(
-            f"\nCreating branch {branch_name} in repo {repo} at {os.path.join(DESTRA_ROOT_FOLDER, repo)} ==================="
+            f"\nCreating branch {branch_name} in repo {repo.upper()} at {os.path.join(DESTRA_ROOT_FOLDER, repo)} ==================="
         )
         os.chdir(os.path.join(DESTRA_ROOT_FOLDER, repo))
         subprocess.run(["git", "switch", "-c", branch_name])
@@ -152,7 +152,7 @@ if ENABLE_GIT_STATUS:
     print(f"\n*****\n***Git status on destra repos in {os.getcwd()}.\n*****")
     for repo in repositories:
         print(
-            f"\nGit status in repo {repo} at {os.path.join(DESTRA_ROOT_FOLDER, repo)} ==================="
+            f"\nGit status in repo {repo.upper()} at {os.path.join(DESTRA_ROOT_FOLDER, repo)} ==================="
         )
         os.chdir(os.path.join(DESTRA_ROOT_FOLDER, repo))
         subprocess.run(["git", "status"])
@@ -160,7 +160,7 @@ if ENABLE_GIT_STATUS:
 if ENABLE_GIT_COMMIT_PUSH:
     for repo in repositories:
         print(
-            f"\nGit actions in repo {repo} at {os.path.join(DESTRA_ROOT_FOLDER, repo)} ==================="
+            f"\nGit actions in repo {repo.upper()} at {os.path.join(DESTRA_ROOT_FOLDER, repo)} ==================="
         )
         os.chdir(os.path.join(DESTRA_ROOT_FOLDER, repo))
         if ENABLE_ADD:
@@ -178,7 +178,7 @@ if ENABLE_GIT_HARD_RESET:
     print(f"\n*****\n***Git pull on destra repos in {os.getcwd()}.\n*****")
     for repo in repositories:
         print(
-            f"\nGit status in repo {repo} at {os.path.join(DESTRA_ROOT_FOLDER, repo)} ==================="
+            f"\nGit status in repo {repo.upper()} at {os.path.join(DESTRA_ROOT_FOLDER, repo)} ==================="
         )
         os.chdir(os.path.join(DESTRA_ROOT_FOLDER, repo))
         subprocess.run(["git", "reset", "--hard", "HEAD"])
@@ -206,7 +206,7 @@ if ENABLE_DIFF:
     if ENABLE_DIFF_CREATION:
         # Produce diff for release and renovate
         for repo in repositories:
-            # print(f"\nDiff between repo {base_repo} and {repo} =============================")
+            # print(f"\nDiff between repo {base_repo} and {repo.upper()} =============================")
             # print("\nRELEASE")
             compare_release = os.path.join(DESTRA_ROOT_FOLDER, repo, files[0])
             result = subprocess.run(
