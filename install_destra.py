@@ -1,3 +1,4 @@
+# run with `DESTRA_ROOT_FOLDER=/Users/abonnel/Documents/Destra python3 install_destra.py`
 import os
 import subprocess
 from pprint import pprint
@@ -24,6 +25,7 @@ ENABLE_CLONING = False
 ENABLE_INSTALL_PRE_COMMIT = False
 ENABLE_CHECKOUT_DEVELOP = True
 ENABLE_PULLING = True
+# If pulling does not work and want to go to HEAD, use git reset --hard origin/develop
 ENABLE_CARGO_UPDATE = False
 ENABLE_BRANCHING = False
 ENABLE_GIT_STATUS = False
